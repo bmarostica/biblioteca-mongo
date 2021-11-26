@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.bson.Document;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class TrocaPontosEntityController {
 
     @ApiOperation(value = "Lista todos os livros disponíveis para troca")
     @GetMapping
-    public List<TrocaPontosDTO> list() {
+    public List<Document> list() {
         return trocaPontosService.list();
     }
 
@@ -35,9 +36,9 @@ public class TrocaPontosEntityController {
             @ApiResponse(code = 500, message = "Erro interno, exceção gerada.")
     })
     @PostMapping
-    public TrocaPontosDTO create(@RequestBody @Valid TrocaPontosCreateDTO trocaPontosCreateDTO){
+    public Document create(@RequestBody @Valid TrocaPontosCreateDTO trocaPontosCreateDTO){
         log.info("Criando livro...");
-        TrocaPontosDTO livro = trocaPontosService.create(trocaPontosCreateDTO);
+        Document livro = trocaPontosService.create(trocaPontosCreateDTO);
         log.info("Livro criado com sucesso!");
 
         return livro;

@@ -7,6 +7,7 @@ import com.dbc.biblioteca.exceptions.RegraDeNegocioException;
 import com.dbc.biblioteca.repository.TrocaPontosRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.bson.Document;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,18 +20,18 @@ public class TrocaPontosService {
     private final ObjectMapper objectMapper;
     private final TrocaPontosRepository trocaPontosRepository;
 
-    public TrocaPontosDTO create(TrocaPontosCreateDTO trocaPontosCreateDTO) {
+    public Document create(TrocaPontosCreateDTO trocaPontosCreateDTO) {
         TrocaPontosEntity pontosEntity = objectMapper.convertValue(trocaPontosCreateDTO, TrocaPontosEntity.class);
         TrocaPontosEntity troca = trocaPontosRepository.save(pontosEntity);
 
-        TrocaPontosDTO pontosDTO = objectMapper.convertValue(troca, TrocaPontosDTO.class);
+        Document pontosDTO = objectMapper.convertValue(troca, Document.class);
 
         return pontosDTO;
     }
 
-    public List<TrocaPontosDTO> list() {
+    public List<Document> list() {
         return trocaPontosRepository.findAll().stream()
-                .map(troca -> objectMapper.convertValue(troca, TrocaPontosDTO.class))
+                .map(troca -> objectMapper.convertValue(troca, Document.class))
                 .collect(Collectors.toList());
     }
 
