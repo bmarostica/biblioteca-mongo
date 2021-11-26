@@ -51,7 +51,7 @@ public class TrocaPontosEntityController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") String id) throws RegraDeNegocioException {
         log.info("Deletando livro...");
-        TrocaPontosService.delete(id);
+        trocaPontosService.delete(id);
         log.info("Livro deletado com sucesso!");
     }
 }
