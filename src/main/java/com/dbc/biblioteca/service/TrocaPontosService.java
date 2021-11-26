@@ -1,9 +1,7 @@
 package com.dbc.biblioteca.service;
 
-import com.dbc.biblioteca.dto.LivroCreateDTO;
-import com.dbc.biblioteca.dto.LivroDTO;
 import com.dbc.biblioteca.dto.TrocaPontosDTO;
-import com.dbc.biblioteca.entity.LivroEntity;
+import com.dbc.biblioteca.dto.TrocaPontosCreateDTO;
 import com.dbc.biblioteca.entity.TrocaPontosEntity;
 import com.dbc.biblioteca.exceptions.RegraDeNegocioException;
 import com.dbc.biblioteca.repository.TrocaPontosRepository;
@@ -12,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,8 +19,8 @@ public class TrocaPontosService {
     private final ObjectMapper objectMapper;
     private final TrocaPontosRepository trocaPontosRepository;
 
-    public TrocaPontosDTO create(TrocaPontosDTO trocaPontosDTO) {
-        TrocaPontosEntity pontosEntity = objectMapper.convertValue(trocaPontosDTO, TrocaPontosEntity.class);
+    public TrocaPontosDTO create(TrocaPontosCreateDTO trocaPontosCreateDTO) {
+        TrocaPontosEntity pontosEntity = objectMapper.convertValue(trocaPontosCreateDTO, TrocaPontosEntity.class);
         TrocaPontosEntity troca = trocaPontosRepository.save(pontosEntity);
 
         TrocaPontosDTO pontosDTO = objectMapper.convertValue(troca, TrocaPontosDTO.class);

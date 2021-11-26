@@ -1,4 +1,5 @@
 package com.dbc.biblioteca.controller;
+import com.dbc.biblioteca.dto.TrocaPontosCreateDTO;
 import com.dbc.biblioteca.dto.TrocaPontosDTO;
 import com.dbc.biblioteca.exceptions.RegraDeNegocioException;
 import com.dbc.biblioteca.service.TrocaPontosService;
@@ -34,9 +35,9 @@ public class TrocaPontosEntityController {
             @ApiResponse(code = 500, message = "Erro interno, exceção gerada.")
     })
     @PostMapping
-    public TrocaPontosDTO create(@RequestBody @Valid TrocaPontosDTO trocaPontosDTO){
+    public TrocaPontosDTO create(@RequestBody @Valid TrocaPontosCreateDTO trocaPontosCreateDTO){
         log.info("Criando livro...");
-        TrocaPontosDTO livro = trocaPontosService.create(trocaPontosDTO);
+        TrocaPontosDTO livro = trocaPontosService.create(trocaPontosCreateDTO);
         log.info("Livro criado com sucesso!");
 
         return livro;

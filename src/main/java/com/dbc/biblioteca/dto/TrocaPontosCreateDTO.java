@@ -3,12 +3,15 @@ package com.dbc.biblioteca.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TrocaPontosDTO extends TrocaPontosCreateDTO {
+public class TrocaPontosCreateDTO {
 
-    String id;
+    String titulo;
+    String autor;
+    String genero;
 
 }

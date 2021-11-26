@@ -16,8 +16,8 @@ import javax.persistence.Id;
 @Document(collection = "troca")
 public class TrocaPontosEntity {
     @Id
-    String idTroca;
-    String titulo;
-    String autor;
-    String genero;
+    private String id;
+    private String titulo;
+    private String autor;
+    private String genero;
 }
