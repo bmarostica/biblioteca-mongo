@@ -1,7 +1,9 @@
 package com.dbc.biblioteca.service;
 
+import com.dbc.biblioteca.dto.LivroDTO;
 import com.dbc.biblioteca.dto.TrocaPontosDTO;
 import com.dbc.biblioteca.dto.TrocaPontosCreateDTO;
+import com.dbc.biblioteca.entity.LivroEntity;
 import com.dbc.biblioteca.entity.TrocaPontosEntity;
 import com.dbc.biblioteca.exceptions.RegraDeNegocioException;
 import com.dbc.biblioteca.repository.TrocaPontosRepository;
@@ -40,4 +42,13 @@ public class TrocaPontosService {
     }
 
 
+    public Document update(String id, TrocaPontosCreateDTO trocaPontosCreateDTO) {
+        TrocaPontosEntity livro = objectMapper.convertValue(trocaPontosCreateDTO,TrocaPontosEntity.class);
+        livro.setId(id);
+        TrocaPontosEntity livroAtualizado = trocaPontosRepository.save(livro);
+
+        Document livroAtual = objectMapper.convertValue(livroAtualizado, Document.class);
+
+        return livroAtual;
+    }
 }

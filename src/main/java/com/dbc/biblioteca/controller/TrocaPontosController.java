@@ -1,6 +1,7 @@
 package com.dbc.biblioteca.controller;
+import com.dbc.biblioteca.dto.LivroCreateDTO;
+import com.dbc.biblioteca.dto.LivroDTO;
 import com.dbc.biblioteca.dto.TrocaPontosCreateDTO;
-import com.dbc.biblioteca.dto.TrocaPontosDTO;
 import com.dbc.biblioteca.exceptions.RegraDeNegocioException;
 import com.dbc.biblioteca.service.TrocaPontosService;
 import io.swagger.annotations.ApiOperation;
@@ -20,7 +21,7 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 @Slf4j
-public class TrocaPontosEntityController {
+public class TrocaPontosController {
     private final TrocaPontosService trocaPontosService;
 
     @ApiOperation(value = "Lista todos os livros disponíveis para troca")
@@ -55,6 +56,21 @@ public class TrocaPontosEntityController {
         log.info("Deletando livro...");
         trocaPontosService.delete(id);
         log.info("Livro deletado com sucesso!");
+    }
+
+    @ApiOperation("Atualiza um livro existente através do id.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Livro atualizado com sucesso!"),
+            @ApiResponse(code = 400, message = "Erro, informação inconsistente."),
+            @ApiResponse(code = 500, message = "Erro interno, exceção gerada.")
+    })
+    @PutMapping("/{id}")
+    public Document update(@PathVariable("id") String id,
+                           @RequestBody @Valid TrocaPontosCreateDTO trocaPontosCreateDTO) throws RegraDeNegocioException {
+        log.info("Atualizando livro...");
+        Document livro = trocaPontosService.update(id, trocaPontosCreateDTO);
+        log.info("Livro atualizado com sucesso");
+        return livro;
     }
 }
 
