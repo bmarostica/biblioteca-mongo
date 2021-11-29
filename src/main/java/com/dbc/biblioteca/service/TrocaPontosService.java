@@ -25,9 +25,7 @@ public class TrocaPontosService {
     public Document create(TrocaPontosCreateDTO trocaPontosCreateDTO) {
         TrocaPontosEntity pontosEntity = objectMapper.convertValue(trocaPontosCreateDTO, TrocaPontosEntity.class);
         TrocaPontosEntity troca = trocaPontosRepository.save(pontosEntity);
-
         Document pontosDTO = objectMapper.convertValue(troca, Document.class);
-
         return pontosDTO;
     }
 
